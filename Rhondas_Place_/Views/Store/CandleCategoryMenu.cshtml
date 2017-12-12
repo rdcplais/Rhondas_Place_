@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Rhondas_Place_.Models.CandleCategory>
+
+<ul id="categories">
+    @foreach (var category in Model)
+    {
+        <li>
+            @*@Html.ActionLink(category.Name, "Browse", new { category = category.Name }, null)*@
+            @Html.ActionLink(category.Name, "Browse", new { CandleCategory = category.Name })
+        </li>
+    }
+</ul>

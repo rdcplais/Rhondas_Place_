@@ -15,6 +15,7 @@ namespace Rhondas_Place_
     {
         protected void Application_Start()
         {
+            System.Data.Entity.Database.SetInitializer(new Rhondas_Place_.Models.SampleData());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -1,0 +1,31 @@
+﻿@model Rhondas_Place_.Models.Candle
+
+@{
+    ViewBag.Title = "Candle - " + Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Candle:  @Model.Title</h2>
+<p>
+    <img alt="@Model.Title"
+         src="@Url.Content(Model.CandleImgUrl)" />
+</p>
+<div id="candle-details">
+    <p>
+        <em>Candle:</em>
+        @Model.CandleCategory.Name
+    </p>
+    <p>
+        <em>Scent:</em>
+        @Model.CandleScent.Name
+    </p>
+    <p>
+        <em>Price:</em>
+        @String.Format("{0:F}", Model.Price)
+    </p>
+    <p class="button">
+        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = Model.CandleId }, "")
+    </p>
+</div>
+
+

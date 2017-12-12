@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -10,6 +11,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Rhondas_Place_.Models;
 
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
+using System.Web.Routing;
+using System.Web.Security;
+
 namespace Rhondas_Place_.Controllers
 {
     [Authorize]
@@ -17,6 +23,15 @@ namespace Rhondas_Place_.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private void MigrateShoppingCart(string UserName)
+        {
+            // Associate shopping cart items with logged-in user
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            cart.MigrateCart(UserName);
+            Session[ShoppingCart.CartSessionKey] = UserName;
+        }
 
         public AccountController()
         {
@@ -79,6 +94,7 @@ namespace Rhondas_Place_.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    MigrateShoppingCart(model.Email);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -155,6 +171,8 @@ namespace Rhondas_Place_.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    MigrateShoppingCart(model.Email);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

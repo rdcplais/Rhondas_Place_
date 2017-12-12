@@ -1,0 +1,73 @@
+﻿@model Rhondas_Place_.Models.Candle
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Candle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CandleCategory.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CandleCategory.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CandleScentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CandleScentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CandleImgUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CandleImgUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CandleScent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CandleScent)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

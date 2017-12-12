@@ -1,0 +1,21 @@
+﻿@model Rhondas_Place_.Models.CandleCategory
+
+@{
+    ViewBag.Title = "Browse Candles";
+}
+
+<div class="category">
+    <h3><em>@Model.Name</em> Selections</h3>
+
+        <ul id="category-list">
+            @foreach (var candle in Model.Candles)
+            {
+                <li>
+                    <a href="@Url.Action("Details", new { id = candle.CandleId })">
+                        <img alt="@candle.Title" src="@Url.Content(candle.CandleImgUrl)" />
+                        <span>@candle.Title</span>
+                    </a>
+                </li>
+            }
+        </ul>
+</div>

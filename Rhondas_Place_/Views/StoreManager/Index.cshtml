@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Rhondas_Place_.Models.Candle>
+@helper Truncate(string input, int length)
+{
+if (input.Length <= length)
+{
+        @input
+}
+else
+{
+        @input.Substring(0, length)<text>...</text>
+}
+}
+
+
+
+<div class="container">
+
+    <div class="jumbotron-special">
+
+        <h2>@ViewBag.Title</h2>
+
+    </div>
+
+</div>
+
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CandleImgUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandleCategory.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandleScent.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Content(item.CandleImgUrl)" alt="IMAGES" />
+                @*@Html.DisplayFor(modelItem => item.CandleImgUrl)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandleCategory.Name)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.CandleScent.Name)*@
+                @Truncate(item.CandleScent.Name, 25)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Title)*@
+                @Truncate(item.Title, 25)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CandleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CandleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CandleId })
+            </td>
+        </tr>
+    }
+</table>

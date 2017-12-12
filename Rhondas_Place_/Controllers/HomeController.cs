@@ -8,6 +8,8 @@ namespace Rhondas_Place_.Controllers
 {
     public class HomeController : Controller
     {
+        //
+        // GET: /Home/
         public ActionResult Index()
         {
             return View();
@@ -22,7 +24,14 @@ namespace Rhondas_Place_.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Rhonda's Place";
+
+            return View();
+        }
+
+        public ActionResult FAQ()
+        {
+            ViewBag.Message = "Frequently Asked Questions";
 
             return View();
         }

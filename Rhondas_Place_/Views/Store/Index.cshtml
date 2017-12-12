@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Rhondas_Place_.Models.CandleCategory>
+@{
+    ViewBag.Title = "Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="jumbotron-special">
+    <h2>@ViewBag.Title</h2>
+</div>
+<h2>Browse Candle Categories</h2>
+<p>
+    Select from @Model.Count()
+    candlecategories:
+</p>
+<ul>
+    @foreach (var CandleCategory in Model)
+    {
+        <li>
+            @Html.ActionLink(CandleCategory.Name, "Browse", new { CandleCategory = CandleCategory.Name })
+        </li>
+    }
+
+
+    @Html.ActionLink("Go to the Store Index", "Index")
+</ul>
+

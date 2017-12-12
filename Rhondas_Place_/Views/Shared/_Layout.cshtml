@@ -3,12 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link href="@Url.Content("~/Content/Site.css")"
+          rel="stylesheet"
+          type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"
+            type="text/javascript"></script>
+
 </head>
-<body>
+<body id="myPage">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,23 +23,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Rhonda's Place", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+                <ul id="navlist">
+                    <li class="first">
+                          <a href="@Url.Content("~")" id="current">Home</a></li>
+                    @*<li><a href="@Url.Content("~/Store/")">Store</a></li>*@
+                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                    <li><a href="@Url.Content("~/StoreManager/")">Admin</a></li>
+                    <li><a href="@Html.Partial("_LoginPartial")"></a></li>
+                </ul>  
             </div>
         </div>
     </div>
+    @{Html.RenderAction("CandleCategoryMenu", "Store");}
     <div class="container body-content">
-        @RenderBody()
+        <div id="main">
+            @RenderBody()
+        </div>
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="container-fluid text-center">
+
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+
+            <p>Website Design By Rhonda's Place for Web Design</p>
+
+            <p>&copy; @DateTime.Now.Year - Rhonda's Place.  All rights reserved.</p>
+
         </footer>
     </div>
 
